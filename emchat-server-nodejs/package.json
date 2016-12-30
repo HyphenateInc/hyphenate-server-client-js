@@ -1,0 +1,22 @@
+{
+  "name": "demo-server-nodejs",
+  "version": "1.0.0",
+  "description": "Node.js server-side REST API example code.",
+  "config":{"ca":"resources/cacert/cacert.pem",
+  "host":"api.hyphenate.io"},
+  "main": "test.js",
+  "dependencies": {
+    "form-data": "^2.1.1",
+    "node-fetch": "^1.6.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start" : "node request.js"
+  },
+  "keywords": [
+    "nodejs"
+  ],
+  "author": "Hyphenate",
+  "license": "ISC"
+}
