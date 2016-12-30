@@ -19,8 +19,8 @@ group = new Group();
 chatRoom = new ChatRoom();
 sendMessage = new SendMessage();
 
-// pick a test
-var i = 33;
+// TODO: pick a test
+var i = 13;
 
 console.log('======================================== test.js - Running test case ' + i + ' ========================================');
 
