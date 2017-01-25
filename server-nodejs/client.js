@@ -92,12 +92,12 @@ function sendRequest(options, callback) {
     //
     // fullOptions.agent = false;
 
-    console.log('Debugger: sendRequest. options: ' + util.inspect(fullOptions, false, null));
+    // console.log('Debugger: sendRequest. options: ' + util.inspect(fullOptions, false, null));
 
     request(fullOptions, function (error, response, body) {
 
         // console.log('Debugger: sendRequest. response body: ' + util.inspect(body, false, null));
-        console.log('Debugger: sendRequest. statusCode: ' + util.inspect(response.statusCode, false, null));
+        // console.log('Debugger: sendRequest. statusCode: ' + util.inspect(response.statusCode, false, null));
 
         if (callback) {
             callback(error, response, body);

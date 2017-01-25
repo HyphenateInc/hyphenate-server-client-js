@@ -58,12 +58,12 @@ function Token() {
         //     options.path = options.path.substring(0, options.path.length - 1);
         // }
 
-        // console.log('Debugger: get token request. options: ' + util.inspect(options, false, null));
+        console.log('Debugger: get token request. options: ' + util.inspect(options, false, null));
 
         request(options, function (error, response, body) {
 
-            // console.log('Debugger: get token request. body: ' + util.inspect(body, false, null));
-            // console.log('Debugger: get token request. statusCode: ' + util.inspect(response.statusCode, false, null));
+            console.log('Debugger: get token request. body: ' + util.inspect(body, false, null));
+            console.log('Debugger: get token request. statusCode: ' + util.inspect(response.statusCode, false, null));
 
             if (!error && response.statusCode == 200) {
                 var d = JSON.parse(body);

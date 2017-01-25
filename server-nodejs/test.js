@@ -106,7 +106,7 @@ switch (i) {
         break;
     case 32:    //Send text message
         message.sendText({
-            type: 'users',
+            target_type: 'users',
             target: ['user101'],
             content: 'this text is from admin',
             from: 'admin',
@@ -115,7 +115,7 @@ switch (i) {
         break;
     case 33:    //Send image message
         message.sendImage({
-            type: 'users',
+            target_type: 'users',
             target: ['user101', 'user102'],
             url: 'https://api.hyphenate.io/hyphenatedemo/demo/chatfiles/61611e30-9b5c-11e6-b3d9-9d52b6f6416b',
             filename: '01.jpg',
@@ -126,7 +126,7 @@ switch (i) {
         break;
     case 34:    //Send audio message
         message.sendAudio({
-            type: 'users',
+            target_type: 'users',
             target: ['user101', 'user102'],
             url: 'https://api.hyphenate.io/hyphenatedemo/demo/chatfiles/83419440-9b79-11e6-a408-01f417d892b0',
             filename: 'audio.mp3',
@@ -138,7 +138,7 @@ switch (i) {
         break;
     case 35:    //Send video message
         message.sendVideo({
-            type: 'users',
+            target_type: 'users',
             target: ['user101', 'user102'],
             url: 'https://api.hyphenate.io/hyphenatedemo/demo/chatfiles/a4eaacd0-9b79-11e6-992f-b32958bd06ae',
             filename: 'web.mp4',
@@ -153,7 +153,7 @@ switch (i) {
         break;
     case 36:    //Send commend message
         message.sendCmd({
-            type: 'users',
+            target_type: 'users',
             target: ['user101', 'user102'],
             action: 'this action is from admin',
             from: 'admin',

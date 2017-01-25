@@ -1,7 +1,7 @@
 {
   "name": "server-nodejs",
   "version": "1.0.0",
-  "description": "Node.js server-side REST API example code.",
+  "description": "Hyphenate Node.js server REST API",
   "config":{"ca":"resources/cacert/cacert.pem",
   "host":"api.hyphenate.io"},
   "main": "test.js",
@@ -13,12 +13,12 @@
   },
   "devDependencies": {},
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start" : "node client.js"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
+	"hyphenate",
     "nodejs"
   ],
-  "author": "Hyphenate",
+  "author": "Hyphenate Inc",
   "license": "ISC"
 }

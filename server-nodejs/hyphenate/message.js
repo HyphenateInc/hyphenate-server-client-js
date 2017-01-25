@@ -1,4 +1,5 @@
 var client = require('./../client');
+const util = require('util');
 
 function Message() {
 
@@ -15,6 +16,8 @@ function Message() {
             from: json.from
         };
         json.ext && (body.ext = json.ext);
+
+        console.log('sendText: ' + util.inspect(body, false, null));
 
         client.client({
             body: body,
