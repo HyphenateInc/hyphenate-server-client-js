@@ -1,5 +1,5 @@
 {
-  "name": "demo-server-nodejs",
+  "name": "server-nodejs",
   "version": "1.0.0",
   "description": "Node.js server-side REST API example code.",
   "config":{"ca":"resources/cacert/cacert.pem",
@@ -14,7 +14,7 @@
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start" : "node request.js"
+    "start" : "node client.js"
   },
   "keywords": [
     "nodejs"

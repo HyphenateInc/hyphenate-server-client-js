@@ -2,10 +2,10 @@ var Token = require('./hyphenate/token');
 var config = require('./resources/config');
 var request = require('request');
 var fs = require('fs');
-const util = require('util');
+var util = require('util');
 
-var ORG_NAME = config.org_name;
-var APP_NAME = config.app_name;
+var ORG_NAME = config.ORG_NAME;
+var APP_NAME = config.APP_NAME;
 const HyphenateFullURL =  'https://' + config.host + '/' + ORG_NAME + '/' + APP_NAME;
 
 var Initialized = false;
@@ -13,21 +13,21 @@ var token = new Token();
 
 function client(json, callback) {
     if (!Initialized || token.isExpire()) {
+
         token.accessToken(function () {
             Initialized = true;
-            if (typeof callback == 'function') {
-                callback(json);
-            } else {
-                sendRequestWithToken(json);
-            }
-        });
 
-    } else {
-        if (typeof callback == 'function') {
-            callback(json);
-        } else {
-            sendRequestWithToken(json);
-        }
+            sendRequestWithToken(json, function(error, response, body){
+                var groupData = JSON.parse(body);
+                if (callback) callback(groupData);
+            });
+        });
+    }
+    else {
+        sendRequestWithToken(json, function(error, response, body){
+            var groupData = JSON.parse(body);
+            if (callback) callback(groupData);
+        });
     }
 }
 
@@ -43,39 +43,37 @@ function uploadFileWithToken(json) {
 }
 
 function sendRequestWithToken(options, callback) {
+
     if (token == null) {
-        console.log('error: failed to access token!')
+        console.log('error: failed to access token!');
     } else {
         options.headers = options.headers || {};
         options.headers['Authorization'] = 'Bearer ' + token.getToken();
         sendRequest(options, function(error, response, body) {
-            if (!error && callback) callback(error, response, body);
-            else if (callback) callback(error);
+            if (!error && callback) {
+                callback(error, response, body);
+                // console.log('callback - sendRequestWithToken. body: ' + body);
+            }
         });
     }
 }
 
 function sendRequest(options, callback) {
 
-    var ca = fs.readFileSync(config.ca, 'utf-8');
+    var fullOptions = options;
 
-    options.headers['Content-Type'] = 'application/json';
-    options.headers['Accept'] = 'application/json';
-    var headers = JSON.stringify(options.headers);
+    fullOptions.url = HyphenateFullURL + '/' + options.path;
+    fullOptions.method = options.method;
 
-    var data = JSON.stringify(options.data);
+    fullOptions.headers = options.headers;
+    fullOptions.headers['Content-Type'] = 'application/json';
+    fullOptions.headers['Accept'] = 'application/json';
 
-    var body = JSON.stringify(options.body);
+    fullOptions.body = JSON.stringify(options.body);
 
-    var fullOptions = {
-        url: HyphenateFullURL + '/' + options.path,
-        method: options.method,
-        body: body,
-        headers: headers,
-        data: data
-        // ca: [ca],
-        // agent: false
-    };
+    if (options.data) {
+        fullOptions.data = JSON.stringify(options.data);
+    }
 
     // options.query = {};
     // //connect with query parameters
@@ -89,14 +87,22 @@ function sendRequest(options, callback) {
     //     options.path = options.path.substring(0, options.path.length - 1);
     // }
 
-    console.log('Debugger: options: ' + util.inspect(fullOptions, false, null));
+    // var ca = fs.readFileSync(config.ca, 'utf-8');
+    // fullOptions.ca = [ca];
+    //
+    // fullOptions.agent = false;
+
+    console.log('Debugger: sendRequest. options: ' + util.inspect(fullOptions, false, null));
 
     request(fullOptions, function (error, response, body) {
 
-        console.log('Debugger: new function requestBase. body: ' + util.inspect(body, false, null));
-        // console.log('Debugger: new function requestBase. statusCode: ' + util.inspect(response.statusCode, false, null));
+        // console.log('Debugger: sendRequest. response body: ' + util.inspect(body, false, null));
+        console.log('Debugger: sendRequest. statusCode: ' + util.inspect(response.statusCode, false, null));
 
-        if (callback) callback(error, response, body);
+        if (callback) {
+            callback(error, response, body);
+            // console.log('callback - sendRequest. body: ' + body);
+        }
     });
 }
 

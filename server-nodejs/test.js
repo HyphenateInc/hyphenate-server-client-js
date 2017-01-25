@@ -20,7 +20,7 @@ chatRoom = new ChatRoom();
 message = new Message();
 
 // pick a test
-var i = 12;
+var i = 32;
 
 console.log('======================================== test.js - Running test case ' + i + ' ========================================');
 
