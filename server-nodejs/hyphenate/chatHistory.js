@@ -1,16 +1,14 @@
 var client = require('./../client');
 function ChatHistory() {
-    //Get chat history
+    // Get chat history
     this.getChatMessages = function (ql, limit, cursor, callback) {
         client.client({
             path: 'chatmessages',
             method: 'GET',
-            query: {'ql':ql, 'limit':limit, 'cursor':cursor},
-            headers: {},
-            callback: function (data) {
-                console.log(data);
-                typeof callback == 'function' && callback(data);
-            }
+            query: {'ql': ql, 'limit': limit, 'cursor': cursor},
+            headers: {}
+        }, function(body){
+            if (callback) callback(body);
         });
     };
 }

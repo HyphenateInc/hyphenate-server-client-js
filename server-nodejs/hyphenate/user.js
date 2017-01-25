@@ -1,107 +1,87 @@
 var client = require('./../client');
 function User() {
 
-    //Create a user
+    // Create a user
     this.createUser = function (username, password, callback) {
-        var body = {username: username, password: password};
+        var data = {username: username, password: password};
         client.client({
-            body: body,
+            data: data,
             path: 'users',
             method: 'POST',
-            headers: {},
-            callback: function (data) {
-                console.log(data);
-                if (typeof callback == 'function')
-                    callback(data);
-            }
+            headers: {}
+        }, function (body) {
+            if (callback) callback(body);
         });
     };
 
-    //Create multiple users
+    // Create multiple users
     this.createUsers = function (users, callback) {
         client.client({
-            body: users,
+            data: users,
             path: 'users',
             method: 'POST',
-            headers:{},
-            callback: function (data) {
-                console.log(data);
-                typeof callback == 'function' && callback(data);
-            }
+            headers: {}
+        }, function (body) {
+            if (callback) callback(body);
         });
     };
 
-    //Get a user
+    // Get a user
     this.getUser = function (username, callback) {
         client.client({
             path: 'users/' + username,
             method: 'GET',
-            headers: {},
-            callback: function (data) {
-                console.log(data);
-                if (typeof callback == 'function')
-                    callback(data);
-            }
+            headers: {}
+        }, function (body) {
+            if (callback) callback(body);
         });
     };
 
-    //Get users in batch
+    // Get users in batch
     this.getUsers = function (limit, cursor, callback) {
         client.client({
             path: 'users',
             method: 'GET',
             headers: {},
-            query: {'limit': limit, 'cursor':cursor},
-            callback: function (data) {
-                console.log(data);
-                if (typeof callback == 'function')
-                    callback(data);
-            }
+            query: {'limit': limit, 'cursor': cursor}
+        }, function (body) {
+            if (callback) callback(body);
         });
     };
 
-    //Delete a user
+    // Delete a user
     this.deleteUser = function (username, callback) {
         client.client({
             path: 'users/' + username,
             method: 'DELETE',
-            headers: {},
-            callback: function (data) {
-                console.log(data);
-                if (typeof callback == 'function')
-                    callback(data);
-            }
+            headers: {}
+        }, function (body) {
+            if (callback) callback(body);
         });
     };
 
-    //Delete users in batch
+    // Delete users in batch
     this.deleteUsers = function (limit, cursor, callback) {
         client.client({
             path: 'users',
             method: 'DELETE',
             headers: {},
-            query: {'limit': limit, 'cursor': cursor},
-            callback: function (data) {
-                console.log(data);
-                if (typeof callback == 'function')
-                    callback(data);
-            }
+            query: {'limit': limit, 'cursor': cursor}
+        }, function (body) {
+            if (callback) callback(body);
         });
     };
 
-    //Reset user's password
+    // Reset user's password
     this.resetPassword = function (username, oldpwd, newpwd, callback) {
         var data = {oldpassword: oldpwd, newpassword: newpwd};
         client.client({
             data: data,
             path: 'users/' + username + '/password',
             method: 'PUT',
-            headers: {},
-            callback: function (data) {
-                console.log(data);
-                if (typeof callback == 'function')
-                    callback(data);
-            }
+            headers: {}
+        }, function (body) {
+            if (callback) callback(body);
         });
     };
 
@@ -112,12 +92,9 @@ function User() {
             data: data,
             path: 'users/' + username,
             method: 'PUT',
-            headers: {},
-            callback: function (data) {
-                console.log(data);
-                if (typeof callback == 'function')
-                    callback(data);
-            }
+            headers: {}
+        }, function (body) {
+            if (callback) callback(body);
         });
     };
 
@@ -126,74 +103,61 @@ function User() {
         client.client({
             path: 'users/' + username + '/contacts/users/' + friendname,
             method: 'POST',
-            headers: {},
-            callback: function (data) {
-                console.log(data);
-                if (typeof callback == 'function')
-                    callback(data);
-            }
+            headers: {}
+        }, function (body) {
+            if (callback) callback(body);
         });
     };
 
-    //Delete a friend for user
+    // Delete a friend for user
     this.deleteFriend = function (username, friendname, callback) {
         client.client({
             path: 'users/' + username + '/contacts/users/' + friendname,
-            method: 'DELETE',
-            callback: function (data) {
-                console.log(data);
-                typeof callback == 'function' && callback(data);
-            }
+            method: 'DELETE'
+        }, function (body) {
+            if (callback) callback(body);
         });
     };
 
-    //Get user's friends list
+    // Get user's friends list
     this.showFriends = function (username, callback) {
         client.client({
             path: 'users/' + username + '/contacts/users',
-            method: 'GET',
-            callback: function (data) {
-                console.log(data);
-                typeof callback == 'function' && callback(data);
-            }
+            method: 'GET'
+        }, function (body) {
+            if (callback) callback(body);
         });
     };
 
-    //Get user's blacklist
+    // Get user's blacklist
     this.getBlacklist = function (username, callback) {
         client.client({
             path: 'users/' + username + '/blocks/users',
-            method: 'GET',
-            callback: function (data) {
-                console.log(data);
-                typeof callback == 'function' && callback(data);
-            }
+            method: 'GET'
+        }, function (body) {
+            if (callback) callback(body);
         });
     };
 
-    //Block user(s)
+    // Block user(s)
     this.addUserForBlacklist = function (username, users, callback) {
         var data = {usernames: users};
         client.client({
             data: data,
             path: 'users/' + username + '/blocks/users',
-            method: 'POST',
-            callback: function (data) {
-                console.log(data);
-                typeof callback == 'function' && callback(data);
-            }
+            method: 'POST'
+        }, function (body) {
+            if (callback) callback(body);
         });
     };
 
-    //UnBlock user(s)
+    // UnBlock user(s)
     this.deleteUserFromBlacklist = function (username, blackuser, callback) {
         client.client({
             path: 'users/' + username + '/blocks/users/' + blackuser,
-            method: 'DELETE',
-            callback: function (data) {
-                console.log(data);
-                typeof callback == 'function' && callback(data);
-            }
+            method: 'DELETE'
+        }, function (body) {
+            if (callback) callback(body);
         });
     };
 
@@ -201,72 +165,59 @@ function User() {
     this.isOnline = function (username, callback) {
         client.client({
             path: 'users/' + username + '/status',
-            method: 'GET',
-            callback: function (data) {
-                console.log(data);
-                typeof callback == 'function' && callback(data);
-            }
+            method: 'GET'
+        }, function (body) {
+            if (callback) callback(body);
         });
     };
 
-    //Get offline message count
+    // Get offline message count
     this.getOfflineMessages = function (username, callback) {
         client.client({
             path: 'users/' + username + '/offline_msg_count',
-            method: 'GET',
-            callback: function (data) {
-                console.log(data);
-                typeof callback == 'function' && callback(data);
-            }
+            method: 'GET'
+        }, function (body) {
+            if (callback) callback(body);
         });
     };
 
-    //Get offline message status
+    // Get offline message status
     this.getOfflineMessageStatus = function (username, msgid, callback) {
         client.client({
             path: 'users/' + username + '/offline_msg_status/' + msgid,
-            method: 'GET',
-            callback: function (data) {
-                console.log(data);
-                typeof callback == 'function' && callback(data);
-            }
+            method: 'GET'
+        }, function (body) {
+            if (callback) callback(body);
         });
     };
 
-    //Deactivate user account
+    // Deactivate user account
     this.deactivateUser = function (username, callback) {
         client.client({
             path: 'users/' + username + '/deactivate',
-            method: 'POST',
-            callback: function (data) {
-                console.log(data);
-                typeof callback == 'function' && callback(data);
-            }
+            method: 'POST'
+        }, function (body) {
+            if (callback) callback(body);
         });
     };
 
-    //Activation user account
+    // Activation user account
     this.activateUser = function (username, callback) {
         client.client({
             path: 'users/' + username + '/activate',
-            method: 'POST',
-            callback: function (data) {
-                console.log(data);
-                typeof callback == 'function' && callback(data);
-            }
+            method: 'POST'
+        }, function (body) {
+            if (callback) callback(body);
         });
-
     };
 
-    //Logout user
+    // Logout user
     this.disconnectUser = function (username, callback) {
         client.client({
             path: 'users/' + username + '/disconnect',
-            method: 'GET',
-            callback: function (data) {
-                console.log(data);
-                typeof callback == 'function' && callback(data);
-            }
+            method: 'GET'
+        }, function (body) {
+            if (callback) callback(body);
         });
     };
 }

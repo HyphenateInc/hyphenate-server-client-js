@@ -3,9 +3,11 @@ var request = require('request');
 const util = require('util');
 var fs = require('fs');
 
-var ORG_NAME = config.org_name;
-var APP_NAME = config.app_name;
-const HyphenateFullURL =  'https://' + config.host + '/' + ORG_NAME + '/' + APP_NAME;
+var ORG_NAME = config.ORG_NAME;
+var APP_NAME = config.APP_NAME;
+
+// Hyphenate host api.hyphenateio
+const HyphenateFullURL = 'https://' + config.host + '/' + ORG_NAME + '/' + APP_NAME;
 
 function Token() {
 
@@ -56,12 +58,12 @@ function Token() {
         //     options.path = options.path.substring(0, options.path.length - 1);
         // }
 
-        console.log('Debugger: options: ' + util.inspect(options, false, null));
+        // console.log('Debugger: get token request. options: ' + util.inspect(options, false, null));
 
         request(options, function (error, response, body) {
 
-            console.log('Debugger: new function requestBase. body: ' + util.inspect(body, false, null));
-            // console.log('Debugger: new function requestBase. statusCode: ' + util.inspect(response.statusCode, false, null));
+            // console.log('Debugger: get token request. body: ' + util.inspect(body, false, null));
+            // console.log('Debugger: get token request. statusCode: ' + util.inspect(response.statusCode, false, null));
 
             if (!error && response.statusCode == 200) {
                 var d = JSON.parse(body);
