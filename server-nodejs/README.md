@@ -1,5 +1,10 @@
-# demo-server-nodejs
+# REST API demo
 The project is an server-side example code that call Hyphenate's REST API using node.js
+
+
+
+# Node.js
+To install Node.js. Go to subfolder /server-nodejs
 
 ### 1. Deployment
 In project directory, you need to install all the required node.js packages by running 
