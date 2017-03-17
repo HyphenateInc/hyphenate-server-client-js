@@ -1,7 +1,7 @@
 {
-  "name": "server-nodejs",
+  "name": "hyphenate-client-api-nodejs",
   "version": "1.0.0",
-  "description": "Hyphenate Node.js server REST API",
+  "description": "Hyphenate Node.js REST API client library",
   "config":{"ca":"resources/cacert/cacert.pem",
   "host":"api.hyphenate.io"},
   "main": "test.js",
@@ -17,7 +17,8 @@
   },
   "keywords": [
 	"hyphenate",
-    "nodejs"
+    "nodejs",
+    "client api"
   ],
   "author": "Hyphenate Inc",
   "license": "ISC"
