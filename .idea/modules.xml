@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/emchat-server-nodejs.iml" filepath="$PROJECT_DIR$/.idea/emchat-server-nodejs.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/hyphenate-server-client-js.iml" filepath="$PROJECT_DIR$/.idea/hyphenate-server-client-js.iml" />
     </modules>
   </component>
 </project>
